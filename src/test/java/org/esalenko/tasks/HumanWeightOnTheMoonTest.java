@@ -4,9 +4,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-/**
- * Created by wrong on 26.09.16.
- */
 public class HumanWeightOnTheMoonTest {
 
     private static final float DELTA = 0.0002f;
