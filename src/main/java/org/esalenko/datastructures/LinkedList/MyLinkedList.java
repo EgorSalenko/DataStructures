@@ -1,7 +1,5 @@
 package org.esalenko.datastructures.LinkedList;
 
-import java.util.LinkedList;
-
 public class MyLinkedList<T> {
 
     private Node head;
@@ -14,21 +12,27 @@ public class MyLinkedList<T> {
         if (head == null) {
             head = node;
             tail = node;
+            head.setIndex(0);
+            tail.setIndex(0);
         } else {
             tail.setNextValue(node);
             tail = node;
+            tail.setIndex(size);
         }
         size++;
     }
 
     public boolean contains(T item) {
-        boolean result = false;
+        Node current = head;
+        while (current != null) {
+            if (current.getValue().equals(item)) {
+                return true;
+            }
 
-        Node node = new Node(item);
+            current = current.getNextValue();
+        }
 
-        LinkedList list = new LinkedList();
-        list.
-        return result;
+        return false;
     }
 
     public boolean remove(T item) {
@@ -64,6 +68,15 @@ public class MyLinkedList<T> {
 
     public int indexOf(T item) {
         // Not implemented
+        Node current = head;
+
+        while (current != null) {
+            if (current.getValue().equals(item)) {
+                return current.getIndex();
+            }
+        }
+
+        return -1;
     }
 
     public void clear() {
@@ -71,27 +84,34 @@ public class MyLinkedList<T> {
     }
 
     public T element() {
-        // Not implemented
+        return (T) head.getValue();
     }
 
     public T getFirst() {
-        // Not implemented
+        if (head == null) {
+            throw new NullPointerException();
+        }
+        return (T) head.getValue();
     }
 
     public T getLast() {
-        // Not implemented
+        return (T) tail.getValue();
     }
 
     public boolean isEmpty() {
-        // Not implemented
+        if (head == null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public int size() {
         return size;
     }
 
-    public T get(int index) {
+   /* public T get(int index) {
         // Not implemented
-    }
+    }*/
 
 }
