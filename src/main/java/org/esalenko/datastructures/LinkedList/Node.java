@@ -5,6 +5,7 @@ public class Node {
     private int index;
     private Object value;
     private Node nextValue;
+    private Node previousValue;
 
     public Node(Object value) {
         this.value = value;
@@ -37,5 +38,13 @@ public class Node {
 
     public void setNextValue(Node nextValue) {
         this.nextValue = nextValue;
+    }
+
+    public Node getPreviousValue() {
+        return previousValue;
+    }
+
+    public void setPreviousValue(Node previousValue) {
+        this.previousValue = previousValue;
     }
 }

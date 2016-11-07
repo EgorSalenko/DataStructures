@@ -7,19 +7,7 @@ public class MyLinkedList<T> {
     private int size;
 
     public void add(T item) {
-        Node node = new Node(item);
-
-        if (head == null) {
-            head = node;
-            tail = node;
-            head.setIndex(0);
-            tail.setIndex(0);
-        } else {
-            tail.setNextValue(node);
-            tail = node;
-            tail.setIndex(size);
-        }
-        size++;
+        addLast(item);
     }
 
     public boolean contains(T item) {
@@ -66,8 +54,15 @@ public class MyLinkedList<T> {
         return false;
     }
 
+    public void iterator() {
+        Node current = head;
+        while (current != null) {
+            current.getValue();
+            current = current.getNextValue();
+        }
+    }
+
     public int indexOf(T item) {
-        // Not implemented
         Node current = head;
 
         while (current != null) {
@@ -80,7 +75,9 @@ public class MyLinkedList<T> {
     }
 
     public void clear() {
-        // Not implemented
+        head = null;
+        tail = null;
+        size = 0;
     }
 
     public T element() {
@@ -106,8 +103,71 @@ public class MyLinkedList<T> {
         }
     }
 
+    public void copyTo(Object[] array, int arrayIndex) {
+        Node current = head;
+        while (current != null) {
+            array[arrayIndex++] = current.getValue();
+            current = current.getNextValue();
+        }
+    }
+
     public int size() {
         return size;
+    }
+
+    public void addFirst(T item) {
+        Node node = new Node(item);
+
+        Node temp = head;
+
+        head.setNextValue(temp);
+
+        if (size == 0) {
+            tail = head;
+        } else {
+            temp.setPreviousValue(head);
+        }
+
+        size++;
+    }
+
+    public void addLast(T item) {
+        Node node = new Node(item);
+
+        if (size == 0) {
+            head = node;
+        } else {
+            tail.setNextValue(node);
+            node.setPreviousValue(tail);
+        }
+
+        tail = node;
+        size++;
+    }
+
+    public void removeFirst() {
+        if (size != 0) {
+            head = head.getNextValue();
+            size--;
+            if (size == 0) {
+                tail = null;
+            } else {
+                head.setPreviousValue(null);
+            }
+        }
+    }
+
+    public void removeLast() {
+        if (size != 0) {
+            if (size == 1) {
+                head = null;
+                tail = null;
+            } else {
+                tail.setPreviousValue(tail.getNextValue());
+                tail = tail.getPreviousValue();
+            }
+            size--;
+        }
     }
 
    /* public T get(int index) {
