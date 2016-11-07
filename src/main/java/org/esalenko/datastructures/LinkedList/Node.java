@@ -2,10 +2,16 @@ package org.esalenko.datastructures.LinkedList;
 
 public class Node {
 
+    private int index;
     private Object value;
     private Node nextValue;
 
     public Node(Object value) {
+        this.value = value;
+    }
+
+    public Node(int index, Object value) {
+        this.index = index;
         this.value = value;
     }
 
