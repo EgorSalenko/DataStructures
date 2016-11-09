@@ -3,9 +3,9 @@ package org.esalenko.datastructures.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class MyLinkedListTest {
+public class MyLinkedListImplTest {
 
-    private MyLinkedList<Integer> list = new MyLinkedList<Integer>();
+    private MyLinkedListImpl<Integer> list = new MyLinkedListImpl<Integer>();
 
     @Test
     public void add() throws Exception {
