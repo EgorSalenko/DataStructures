@@ -1,13 +1,17 @@
 package org.esalenko.datastructures.ArrayList;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     private Object[] srcArray;
     private int size;
-    private static int BASIC_SIZE = 0;
+
+    List<Integer> integerList = new ArrayList<>();
 
     public MyArrayListImpl() {
-        size = BASIC_SIZE;
+        size = 0;
         srcArray = (T[]) new Object[size];
     }
 
@@ -42,8 +46,8 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
         if (index < 0 || size < index) {
             throw new IllegalArgumentException();
         }
-
-        System.arraycopy(srcArray, index, srcArray, index - 1, srcArray.length - 1);
+        int shift = index + 1;
+        System.arraycopy(srcArray, shift, srcArray, index, size - shift);
         size--;
     }
 
