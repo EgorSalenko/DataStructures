@@ -12,11 +12,15 @@ public interface MyArrayList<T> {
 
     boolean contains(T item);
 
-    void iterator();
+    T iterator();
 
     void clear();
 
     int size();
 
     void extensionArray();
+
+    void copyTo(T[] array, int index);
+
+    T get(int index);
 }
