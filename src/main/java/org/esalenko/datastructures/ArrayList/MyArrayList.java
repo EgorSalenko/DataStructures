@@ -23,6 +23,4 @@ public interface MyArrayList<T> {
     void copyTo(T[] array, int index);
 
     T get(int index);
-
-    void trim();
 }

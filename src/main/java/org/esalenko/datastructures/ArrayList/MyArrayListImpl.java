@@ -108,12 +108,4 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
             throw new IndexOutOfBoundsException();
         }
     }
-
-    @Override
-    public void trim() {
-        if (srcArray.length != size) {
-            Object[] tempArray = (T[]) new Object[size];
-            System.arraycopy(srcArray, 0, tempArray, 0, tempArray.length);
-        }
-    }
 }

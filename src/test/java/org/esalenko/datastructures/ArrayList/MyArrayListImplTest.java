@@ -110,16 +110,4 @@ public class MyArrayListImplTest {
     public void copyTo(){
 
     }
-
-    @Test
-    public void trim() {
-        list.add(1);
-        list.add(2);
-        list.add(3);
-        list.add(4);
-        System.out.println(list.size());
-        list.trim();
-        System.out.println(list.size());
-    }
-
 }
