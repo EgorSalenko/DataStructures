@@ -1,7 +1,5 @@
 package org.esalenko.datastructures.ArrayList;
 
-import java.util.Arrays;
-
 public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     private Object[] srcArray;
@@ -31,10 +29,12 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public void insert(int index, T item) {
-        while (srcArray.length == size || size < index) {
+        if (srcArray.length == size || size < index) {
             extensionArray();
+            size++;
         }
         srcArray[index] = item;
+        size++;
     }
 
     @Override
