@@ -53,7 +53,6 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public int indexOf(T item) {
-
         for (int i = 0; i < srcArray.length; i++) {
             if (srcArray[i].equals(item)) {
                 return i;

@@ -50,9 +50,15 @@ public class MyArrayListImplTest {
         }
     }
 
-    @Test
+    @Test(timeout = 1000)
     public void indexOf() throws Exception {
-
+        list.insert(0, 2);
+        list.insert(1, 3);
+        list.insert(2, 1);
+        int actual = list.indexOf(1);
+        int expected = 2;
+        System.out.println(actual);
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
