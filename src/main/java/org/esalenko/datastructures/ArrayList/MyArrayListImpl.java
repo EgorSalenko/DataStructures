@@ -63,13 +63,7 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public boolean contains(T item) {
-        for (int i = 0; i < srcArray.length; i++) {
-            if (srcArray[i].equals(item)) {
-                return true;
-            }
-        }
-
-        return false;
+        return indexOf(item) != -1;
     }
 
     @Override

@@ -63,7 +63,13 @@ public class MyArrayListImplTest {
 
     @Test
     public void contains() throws Exception {
+        list.insert(0, 2);
+        list.insert(1, 3);
+        list.insert(2, 1);
+        list.insert(3, 5);
 
+        boolean actual = list.contains(3);
+        Assert.assertEquals(true, actual);
     }
 
     @Test
