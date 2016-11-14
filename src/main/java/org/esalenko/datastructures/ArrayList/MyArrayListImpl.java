@@ -86,7 +86,7 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
     }
 
     @Override
-    public void copyTo(T[] array, int index) {
+    public void copyTo(Object[] array, int index) {
         System.arraycopy(srcArray, 0, array, index, size);
     }
 

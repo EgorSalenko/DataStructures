@@ -103,14 +103,21 @@ public class MyArrayListImplTest {
 
     @Test
     public void copyTo(){
-        Integer[] integers = new Integer[0];
+        Integer[] integers = new Integer[5];
         list.add(1);
         list.add(2);
         list.add(3);
         list.add(4);
         list.add(5);
 
+        System.out.println("List array - source");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+
+
         list.copyTo(integers, 0);
+        System.out.println("Copied array");
         for (int i = 0; i < integers.length; i++) {
             System.out.println(integers[i]);
         }
