@@ -5,6 +5,9 @@ import org.esalenko.datastructures.LinkedList.MyLinkedListImpl;
 
 public class MyStackImpl<T> implements MyStack<T> {
 
+    /**
+     * In this case i'm using my own implementation of Linked List
+     */
     private MyLinkedList<T> stack = new MyLinkedListImpl<T>();
 
     @Override
@@ -14,12 +17,12 @@ public class MyStackImpl<T> implements MyStack<T> {
 
     @Override
     public T pop() {
-        if (stack.size() == 0) {
+        if (stack.size() == 0)
             throw new NullPointerException();
-        }
-        T result = stack.getLast();
+
+        T last = stack.getLast();
         stack.removeLast();
-        return result;
+        return last;
     }
 
     @Override
