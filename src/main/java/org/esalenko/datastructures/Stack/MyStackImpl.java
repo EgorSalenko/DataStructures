@@ -17,8 +17,7 @@ public class MyStackImpl<T> implements MyStack<T> {
 
     @Override
     public T pop() {
-        if (stack.size() == 0)
-            throw new NullPointerException();
+        checkIsEmpty();
 
         T last = stack.getLast();
         stack.removeLast();
@@ -27,8 +26,7 @@ public class MyStackImpl<T> implements MyStack<T> {
 
     @Override
     public T peek() {
-        if (stack.size() == 0)
-            throw new NullPointerException();
+        checkIsEmpty();
 
         return stack.getLast();
     }
@@ -36,5 +34,10 @@ public class MyStackImpl<T> implements MyStack<T> {
     @Override
     public int size() {
         return stack.size();
+    }
+
+    private void checkIsEmpty() {
+        if (stack.size() == 0)
+            throw new NullPointerException();
     }
 }
