@@ -118,14 +118,13 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
     public void addFirst(T item) {
         Node node = new Node(item);
 
-        Node temp = head;
-
-        head.setNextValue(temp);
-
         if (size == 0) {
+            head = node;
             tail = head;
         } else {
-            temp.setPreviousValue(head);
+            Node temp = head;
+            head = node;
+            head.setPreviousValue(temp);
         }
 
         size++;
@@ -136,6 +135,7 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
 
         if (size == 0) {
             head = node;
+            tail = node;
         } else {
             tail.setNextValue(node);
             node.setPreviousValue(tail);

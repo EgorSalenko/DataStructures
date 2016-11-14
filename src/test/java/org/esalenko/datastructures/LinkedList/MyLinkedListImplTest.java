@@ -16,6 +16,28 @@ public class MyLinkedListImplTest {
     }
 
     @Test
+    public void addFirst() throws Exception {
+        list.add(2);
+        list.add(3);
+        list.addFirst(1);
+        Integer expected = 1;
+        Integer actual = list.getFirst();
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void addLast() throws Exception {
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.addLast(5);
+        Integer actual = list.getLast();
+        Integer expected = 5;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
     public void contains() throws Exception {
         list.add(2);
         boolean actual = list.contains(1);
