@@ -17,8 +17,7 @@ public class MyQueueImpl<T> implements MyQueue<T> {
 
     @Override
     public T dequeue() {
-        if (queue.size() == 0)
-            throw new NullPointerException("The queue is empty");
+        checkIsEmpty();
 
         T last = queue.getLast();
         queue.removeLast();
@@ -27,8 +26,7 @@ public class MyQueueImpl<T> implements MyQueue<T> {
 
     @Override
     public T peek() {
-        if (queue.size() == 0)
-            throw new NullPointerException("The queue is empty");
+        checkIsEmpty();
 
         return queue.getLast();
     }
@@ -36,5 +34,10 @@ public class MyQueueImpl<T> implements MyQueue<T> {
     @Override
     public int size() {
         return queue.size();
+    }
+
+    private void checkIsEmpty() {
+        if (queue.size() == 0)
+            throw new NullPointerException("The queue is empty");
     }
 }
