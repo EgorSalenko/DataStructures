@@ -73,11 +73,6 @@ public class MyArrayListImplTest {
     }
 
     @Test
-    public void iterator() throws Exception {
-
-    }
-
-    @Test
     public void clear() throws Exception {
         list.add(1);
         list.add(1);
@@ -108,6 +103,16 @@ public class MyArrayListImplTest {
 
     @Test
     public void copyTo(){
+        Integer[] integers = new Integer[0];
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
 
+        list.copyTo(integers, 0);
+        for (int i = 0; i < integers.length; i++) {
+            System.out.println(integers[i]);
+        }
     }
 }

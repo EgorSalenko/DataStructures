@@ -12,8 +12,6 @@ public interface MyArrayList<T> {
 
     boolean contains(T item);
 
-    T iterator();
-
     void clear();
 
     int size();

@@ -67,16 +67,6 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
     }
 
     @Override
-    public T iterator() {
-        T temp = null;
-        for (int i = 0; i < srcArray.length; i++) {
-            temp = (T) srcArray[i];
-        }
-
-        return temp;
-    }
-
-    @Override
     public void clear() {
         srcArray = (T[]) new Object[0];
         size = 0;
@@ -97,7 +87,7 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public void copyTo(T[] array, int index) {
-        System.arraycopy(srcArray, 0, array, index, srcArray.length);
+        System.arraycopy(srcArray, 0, array, index, size);
     }
 
     @Override
