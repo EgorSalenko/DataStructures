@@ -3,6 +3,8 @@ package org.esalenko.datastructures.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.beans.Transient;
+
 public class MyLinkedListImplTest {
 
     private MyLinkedListImpl<Integer> list = new MyLinkedListImpl<Integer>();
@@ -49,6 +51,33 @@ public class MyLinkedListImplTest {
         list.add(0);
         boolean actual = list.remove(1);
         Assert.assertEquals(false, actual);
+    }
+
+    @Test
+    public void removeFirst() throws Exception {
+        list.add(0);
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        list.removeFirst();
+        System.out.println(list.getFirst());
+        System.out.println(list.getLast());
+
+        Integer actual = list.getFirst();
+        Integer expected = 1;
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void removeLast() throws Exception {
+        list.add(0);
+        list.add(1);
+        list.add(2);
+
+        list.removeLast();
+
+        System.out.println(list.getLast());
     }
 
     @Test

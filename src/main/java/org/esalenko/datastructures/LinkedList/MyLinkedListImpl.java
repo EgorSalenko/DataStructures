@@ -147,13 +147,13 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
 
     public void removeFirst() {
         if (size != 0) {
-            head = head.getNextValue();
-            size--;
-            if (size == 0) {
+            if (size == 1) {
+                head = null;
                 tail = null;
             } else {
-                head.setPreviousValue(null);
+                head = head.getNextValue();
             }
+            size--;
         }
     }
 
@@ -163,7 +163,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
                 head = null;
                 tail = null;
             } else {
-                tail.setPreviousValue(tail.getNextValue());
                 tail = tail.getPreviousValue();
             }
             size--;
