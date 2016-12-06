@@ -33,5 +33,18 @@
             <version>4.12</version>
         </dependency>
 
+        <dependency>
+            <groupId>edu.princeton.cs.algs4</groupId>
+            <artifactId>algs4</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/library/algs4.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>edu.princeton.cs.algs4</groupId>
+            <artifactId>stdlib</artifactId>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/library/stdlib.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
