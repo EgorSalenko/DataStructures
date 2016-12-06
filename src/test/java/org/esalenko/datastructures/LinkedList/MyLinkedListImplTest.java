@@ -3,8 +3,6 @@ package org.esalenko.datastructures.LinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.beans.Transient;
-
 public class MyLinkedListImplTest {
 
     private MyLinkedListImpl<Integer> list = new MyLinkedListImpl<Integer>();

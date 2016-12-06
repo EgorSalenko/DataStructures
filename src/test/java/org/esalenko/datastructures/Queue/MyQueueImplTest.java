@@ -3,8 +3,6 @@ package org.esalenko.datastructures.Queue;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class MyQueueImplTest {
 
     private MyQueue<Integer> queue = new MyQueueImpl<>();

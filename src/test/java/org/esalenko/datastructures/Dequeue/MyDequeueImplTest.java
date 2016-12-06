@@ -3,8 +3,6 @@ package org.esalenko.datastructures.Dequeue;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class MyDequeueImplTest {
 
     MyDequeue<Integer> dequeue = new MyDequeueImpl<>();
