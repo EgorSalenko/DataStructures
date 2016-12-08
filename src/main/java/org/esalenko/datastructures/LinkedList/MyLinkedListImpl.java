@@ -16,34 +16,27 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
             if (current.getValue().equals(item)) {
                 return true;
             }
-
             current = current.getNextValue();
         }
-
         return false;
     }
 
     public boolean remove(T item) {
         Node previous = null;
         Node current = head;
-
         while (current != null) {
-
             if (current.getValue().equals(item)) {
-
                 if (previous != null) {
                     previous.setNextValue(current.getNextValue());
                     if (current.getNextValue() == null) {
                         tail = previous;
                     }
-
                 } else {
                     head = head.getNextValue();
                     if (head == null) {
                         tail = null;
                     }
                 }
-
                 size--;
                 return true;
             }
@@ -70,7 +63,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
                 return current.getIndex();
             }
         }
-
         return -1;
     }
 
@@ -117,7 +109,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
 
     public void addFirst(T item) {
         Node node = new Node(item);
-
         if (size == 0) {
             head = node;
             tail = head;
@@ -126,7 +117,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
             head = node;
             head.setPreviousValue(temp);
         }
-
         size++;
     }
 
@@ -140,7 +130,6 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
             tail.setNextValue(node);
             node.setPreviousValue(tail);
         }
-
         tail = node;
         size++;
     }
@@ -168,9 +157,4 @@ public class MyLinkedListImpl<T> implements MyLinkedList<T>{
             size--;
         }
     }
-
-   /* public T get(int index) {
-        // Not implemented
-    }*/
-
 }
