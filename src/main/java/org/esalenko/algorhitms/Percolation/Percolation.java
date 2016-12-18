@@ -4,7 +4,7 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 
-    private int[][] sites; // 0 - blocked, 1 - open
+    private int[][] sites;
     private WeightedQuickUnionUF uf;
     private int top;
     private int bottom;
@@ -17,16 +17,32 @@ public class Percolation {
 
         uf = new WeightedQuickUnionUF(n * n + 2);
         sites = new int[n][n];
-        top = sites[0][0];
-        bottom = sites[n - 1][n - 1];
+        top = 0;
+        bottom = n * n + 1;
     }
 
     public void open(int row, int col) {
         validate(row, col);
-        if (!isOpen(row, col)) {
-            sites[row - 1][col - 1] = 1;
+        sites[row - 1][col - 1] = 1;
 
-        }
+        if (row == 1)
+            uf.union(getIndex(row, col), top);
+
+        if (row == n)
+            uf.union(getIndex(row, col), bottom);
+
+        if (col > 1 && isOpen(row, col - 1))
+            uf.union(getIndex(row, col), getIndex(row, col - 1));
+
+        if (col < n && isOpen(row, col + 1))
+            uf.union(getIndex(row, col), getIndex(row, col + 1));
+
+        if (row > 1 && isOpen(row - 1, col))
+            uf.union(getIndex(row, col), getIndex(row - 1, col));
+
+        if (row < n && isOpen(row + 1, col))
+            uf.union(getIndex(row, col), getIndex(row + 1, col));
+
     }
 
     public boolean isOpen(int row, int col) {
@@ -36,7 +52,7 @@ public class Percolation {
 
     public boolean isFull(int row, int col) {
         validate(row, col);
-        return uf.connected(top, sites[row - 1][col - 1]);
+        return uf.connected(top, getIndex(row, col));
     }
 
     public boolean percolates() {
