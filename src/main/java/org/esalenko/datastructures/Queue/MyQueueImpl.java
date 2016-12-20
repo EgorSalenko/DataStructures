@@ -18,7 +18,6 @@ public class MyQueueImpl<T> implements MyQueue<T> {
     @Override
     public T dequeue() {
         checkIsEmpty();
-
         T last = queue.getLast();
         queue.removeLast();
         return last;
@@ -27,7 +26,6 @@ public class MyQueueImpl<T> implements MyQueue<T> {
     @Override
     public T peek() {
         checkIsEmpty();
-
         return queue.getLast();
     }
 
