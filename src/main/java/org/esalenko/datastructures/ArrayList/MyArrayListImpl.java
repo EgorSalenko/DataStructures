@@ -1,60 +1,55 @@
 package org.esalenko.datastructures.ArrayList;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MyArrayListImpl<T> implements MyArrayList<T> {
 
-    private Object[] srcArray;
+    private Object[] list;
     private int size;
-
-    List<Integer> integerList = new ArrayList<>();
 
     public MyArrayListImpl() {
         size = 0;
-        srcArray = (T[]) new Object[size];
+        list = (T[]) new Object[size];
     }
 
     public MyArrayListImpl(int length) {
         if (length < 0) {
-            throw new IllegalArgumentException("Length more then 0");
+            throw new IllegalArgumentException();
         } else {
-            srcArray = (T[]) new Object[length];
+            list = (T[]) new Object[length];
             size = length;
         }
     }
 
     @Override
     public void add(T item) {
-        if (srcArray.length == size)
+        if (list.length == size)
             extensionArray();
-        srcArray[size++] = item;
+        list[size++] = item;
     }
 
     @Override
     public void insert(int index, T item) {
-        if (srcArray.length == size || size < index) {
+        if (list.length == size || size < index) {
             extensionArray();
             size++;
         }
-        srcArray[index] = item;
+        list[index] = item;
         size++;
     }
 
     @Override
     public void remove(int index) {
-        if (index < 0 || size < index) {
+        if (index < 0 || size < index)
             throw new IllegalArgumentException();
-        }
+
         int shift = index + 1;
-        System.arraycopy(srcArray, shift, srcArray, index, size - shift);
+        System.arraycopy(list, shift, list, index, size - shift);
         size--;
     }
 
     @Override
     public int indexOf(T item) {
-        for (int i = 0; i < srcArray.length; i++) {
-            if (srcArray[i].equals(item)) {
+        for (int i = 0; i < list.length; i++) {
+            if (list[i].equals(item)) {
                 return i;
             }
         }
@@ -68,7 +63,7 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public void clear() {
-        srcArray = (T[]) new Object[0];
+        list = (T[]) new Object[0];
         size = 0;
     }
 
@@ -79,21 +74,21 @@ public class MyArrayListImpl<T> implements MyArrayList<T> {
 
     @Override
     public void extensionArray() {
-        int newSize = srcArray.length == 0 ? 16 : srcArray.length + 1;
+        int newSize = list.length == 0 ? 16 : list.length + 1;
         Object[] newArray = (T[]) new Object[newSize];
-        System.arraycopy(srcArray, 0, newArray, 0, srcArray.length);
-        srcArray = newArray.clone();
+        System.arraycopy(list, 0, newArray, 0, list.length);
+        list = newArray.clone();
     }
 
     @Override
     public void copyTo(Object[] array, int index) {
-        System.arraycopy(srcArray, 0, array, index, size);
+        System.arraycopy(list, 0, array, index, size);
     }
 
     @Override
     public T get(int index) {
         if (index >= 0 || index < size) {
-            return (T) srcArray[index];
+            return (T) list[index];
         } else {
             throw new IndexOutOfBoundsException();
         }
