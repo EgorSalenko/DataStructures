@@ -18,7 +18,6 @@ public class MyStackImpl<T> implements MyStack<T> {
     @Override
     public T pop() {
         checkIsEmpty();
-
         T last = stack.getLast();
         stack.removeLast();
         return last;
@@ -27,7 +26,6 @@ public class MyStackImpl<T> implements MyStack<T> {
     @Override
     public T peek() {
         checkIsEmpty();
-
         return stack.getLast();
     }
 
