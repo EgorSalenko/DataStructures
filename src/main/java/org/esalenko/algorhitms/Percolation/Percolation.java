@@ -24,7 +24,9 @@ public class Percolation {
     }
 
     public void open(int row, int col) {
-        validate(row, col);
+        if (row < 0 || row > n || col < 0 || col > n)
+            throw new IndexOutOfBoundsException();
+
         sites[row - 1][col - 1] = true;
 
         int current = getIndex(row, col);
@@ -65,12 +67,16 @@ public class Percolation {
     }
 
     public boolean isOpen(int row, int col) {
-        validate(row, col);
+        if (row < 0 || row > n || col < 0 || col > n)
+            throw new IndexOutOfBoundsException();
+
         return sites[row - 1][col - 1];
     }
 
     public boolean isFull(int row, int col) {
-        validate(row, col);
+        if (row < 0 || row > n || col < 0 || col > n)
+            throw new IndexOutOfBoundsException();
+
         int current = getIndex(row, col);
         return uf.connected(top, current) && ufTop.connected(top, current);
     }
