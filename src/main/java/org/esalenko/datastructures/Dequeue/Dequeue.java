@@ -72,9 +72,8 @@ public class Dequeue<Item> implements Iterable<Item> {
 
     // remove and return the item from the front
     public Item removeFirst() {
-        Node removed = null;
+        Node removed = head;
         if (head != null) {
-            removed = head;
             head = head.next;
             size--;
         } else {
@@ -86,10 +85,10 @@ public class Dequeue<Item> implements Iterable<Item> {
 
     // remove and return the item from the end
     public Item removeLast() {
-        Node removed = null;
+        Node removed = tail;
         if (tail != null) {
-            removed = tail;
-            tail = tail.previous;
+            tail.previous = tail;
+            tail.previous.next = null;
             size--;
         } else {
             throw new NoSuchElementException();
@@ -128,8 +127,7 @@ public class Dequeue<Item> implements Iterable<Item> {
         integers.addFirst(1);
         integers.addLast(7);
         integers.addFirst(2);
-        integers.removeFirst();
-
+        integers.removeLast();
 
         System.out.println("Size: " + integers.size());
 
