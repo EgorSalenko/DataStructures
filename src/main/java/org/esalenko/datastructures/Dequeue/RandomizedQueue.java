@@ -1,6 +1,7 @@
 package org.esalenko.datastructures.Dequeue;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -25,12 +26,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // add the item
     public void enqueue(Item item) {
+        if (item == null) throw new NullPointerException();
         if (size == array.length) resize(2 * array.length);
         array[size++] = item;
     }
 
     // remove and return a random item
     public Item dequeue() {
+        if (size == 0) throw new NoSuchElementException();
         Random random = new Random();
         int index = random.nextInt(size);
         Item removed = array[index];
@@ -40,6 +43,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
     // return (but do not remove) a random item
     public Item sample() {
+        if (size == 0) throw new NoSuchElementException();
         Random random = new Random();
         int index = random.nextInt(size);
         return array[index];

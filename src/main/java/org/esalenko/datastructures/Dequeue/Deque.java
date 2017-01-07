@@ -3,7 +3,7 @@ package org.esalenko.datastructures.Dequeue;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class Dequeue<Item> implements Iterable<Item> {
+public class Deque<Item> implements Iterable<Item> {
 
     private class Node {
         private Item value;
@@ -16,7 +16,7 @@ public class Dequeue<Item> implements Iterable<Item> {
     private Node tail;
 
     // construct an empty deque
-    public Dequeue() {
+    public Deque() {
 
     }
 
@@ -122,7 +122,7 @@ public class Dequeue<Item> implements Iterable<Item> {
 
     // unit testing
     public static void main(String[] args) {
-        Dequeue<Integer> integers = new Dequeue<>();
+        Deque<Integer> integers = new Deque<>();
 
         integers.addFirst(1);
         integers.addLast(7);
