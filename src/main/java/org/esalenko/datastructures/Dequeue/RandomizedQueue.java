@@ -34,8 +34,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // remove and return a random item
     public Item dequeue() {
         if (size == 0) throw new NoSuchElementException();
-        Random random = new Random();
-        int index = random.nextInt(size);
+        int index = (int) (Math.random() + size);
         Item removed = array[index];
         array[index] = null;
         return removed;
@@ -44,8 +43,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // return (but do not remove) a random item
     public Item sample() {
         if (size == 0) throw new NoSuchElementException();
-        Random random = new Random();
-        int index = random.nextInt(size);
+        int index = (int) (Math.random() + size);
         return array[index];
     }
 
