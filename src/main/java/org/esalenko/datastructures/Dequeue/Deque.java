@@ -12,8 +12,7 @@ public class Deque<Item> implements Iterable<Item> {
     }
 
     private int size;
-    private Node head;
-    private Node tail;
+    private Node head, tail;
 
     // construct an empty deque
     public Deque() {
@@ -41,6 +40,7 @@ public class Deque<Item> implements Iterable<Item> {
             Node newHead = new Node();
             newHead.value = item;
             newHead.next = oldHead;
+            oldHead.previous = newHead;
             head = newHead;
         } else {
             head = new Node();
@@ -72,29 +72,29 @@ public class Deque<Item> implements Iterable<Item> {
 
     // remove and return the item from the front
     public Item removeFirst() {
-        Node removed = head;
-        if (head != null) {
-            head = head.next;
-            size--;
-        } else {
-            throw new NoSuchElementException();
-        }
 
-        return removed.value;
+        if (isEmpty())
+            throw new NoSuchElementException();
+
+        Node item = head;
+        head = head.next;
+        size--;
+
+        return item.value;
     }
 
     // remove and return the item from the end
     public Item removeLast() {
-        Node removed = tail;
-        if (tail != null) {
-            tail.previous = tail;
-            tail.previous.next = null;
-            size--;
-        } else {
-            throw new NoSuchElementException();
-        }
 
-        return removed.value;
+        if (isEmpty())
+            throw new NoSuchElementException();
+
+        Node item = tail;
+        tail = tail.previous;
+        size--;
+
+        return item.value;
+
     }
 
     // return an iterator over items in order from front to end
@@ -111,6 +111,7 @@ public class Deque<Item> implements Iterable<Item> {
 
             @Override
             public Item next() {
+                if (isEmpty()) throw new NoSuchElementException();
                 Item item = current.value;
                 current = current.next;
                 return item;
@@ -122,18 +123,29 @@ public class Deque<Item> implements Iterable<Item> {
 
     // unit testing
     public static void main(String[] args) {
-        Deque<Integer> integers = new Deque<>();
+//        Deque<Integer> integers = new Deque<>();
+//
+//        integers.addFirst(1);
+//        integers.addLast(7);
+//        integers.addFirst(2);
+//        integers.removeLast();
+//        integers.removeFirst();
 
-        integers.addFirst(1);
-        integers.addLast(7);
-        integers.addFirst(2);
-        integers.removeLast();
+        Deque<Integer> deque = new Deque<>();
 
-        System.out.println("Size: " + integers.size());
+        deque.addFirst(0);
+        deque.addFirst(1);
+        deque.addFirst(2);
+        deque.isEmpty();
+        deque.removeLast(); //     ==> 0
+        deque.addFirst(5);
+        deque.addFirst(6);
+        deque.removeLast();
 
-        for (Integer integer : integers) {
+        System.out.println("Size: " + deque.size());
+
+        for (Integer integer : deque) {
             System.out.println(integer);
         }
-
     }
 }
