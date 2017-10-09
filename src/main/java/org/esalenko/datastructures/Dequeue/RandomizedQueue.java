@@ -1,15 +1,16 @@
 package org.esalenko.datastructures.Dequeue;
 
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Random;
+
+
+import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
     private Item[] items;
     private int size;
-
-    private Random random = new Random();
 
     // construct an empty randomized queue
     public RandomizedQueue() {
@@ -36,23 +37,31 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // remove and return a random item
     public Item dequeue() {
         if (isEmpty()) throw new NoSuchElementException();
-        int index = getRandomIndex();
+        int index = getRandomIndex(0);
         Item item = items[index];
-        items[index] = null;
-        size--;
+        if (index <= items.length) {
+            items[index] = items[index++];
+        } else if (index == size - 1) {
+            items[index] = null;
+        }
+        else {
+            items[index] = items[size - 1];
+            items[index] = null;
+        }
         if (size == items.length) resize(2 * items.length);
+        size--;
 
         return item;
     }
 
-    private int getRandomIndex() {
-        return random.nextInt(size);
+    private int getRandomIndex(int range) {
+        return StdRandom.uniform(range, size);
     }
 
     // return (but do not remove) a random item
     public Item sample() {
         if (isEmpty()) throw new NoSuchElementException();
-        int index = getRandomIndex();
+        int index = getRandomIndex(0);
         return items[index];
     }
 
@@ -69,7 +78,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 
             @Override
             public Item next() {
-                int index = getRandomIndex();
+                if (i == size) throw new NoSuchElementException();
+                int index = getRandomIndex(i);
                 i++;
                 return items[index];
             }
@@ -89,26 +99,5 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         Item[] newItemsArray = (Item[]) new Object[capacity];
         System.arraycopy(items, 0, newItemsArray, 0, size);
         items = newItemsArray;
-    }
-
-    // unit testing (optional)
-    public static void main(String[] args) {
-
-        RandomizedQueue<Integer> integers = new RandomizedQueue<>();
-        integers.enqueue(1);
-        integers.enqueue(2);
-        integers.enqueue(3);
-        integers.enqueue(4);
-        integers.enqueue(5);
-        System.out.println();
-        System.out.println("Get random item: " + integers.sample());
-        integers.dequeue();
-        System.out.println("isEmpty: " + integers.isEmpty());
-
-        System.out.println("Size: " + integers.size());
-
-        for (Integer integer : integers)
-            System.out.println(integer);
-
     }
 }

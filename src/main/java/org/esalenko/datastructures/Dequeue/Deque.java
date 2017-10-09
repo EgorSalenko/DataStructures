@@ -74,7 +74,6 @@ public class Deque<Item> implements Iterable<Item> {
         if (isEmpty()) throw new NoSuchElementException();
         Item removed = last.item;
         last = last.previous;
-        last.next = null;
         size--;
 
         return removed;
@@ -107,27 +106,5 @@ public class Deque<Item> implements Iterable<Item> {
         };
 
         return iterator;
-    }
-
-    // unit testing
-    public static void main(String[] args) {
-
-        Deque<Integer> integers = new Deque<>();
-
-        integers.addFirst(4);
-        integers.addFirst(5);
-        integers.addFirst(6);
-        integers.addLast(3);
-        integers.addLast(2);
-        integers.addLast(1);
-        integers.removeLast();
-        integers.removeLast();
-        integers.removeFirst();
-        integers.removeFirst();
-        for (Integer integer : integers) {
-            System.out.print(integer + ", ");
-        }
-        System.out.println();
-        System.out.println("Size : " + integers.size());
     }
 }
