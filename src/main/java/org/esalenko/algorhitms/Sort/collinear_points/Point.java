@@ -50,20 +50,43 @@ public class Point implements Comparable<Point> {
 
     // the slope between this point and that point
     public double slopeTo(Point that) {
+        if (that == null) throw new IllegalArgumentException();
+
+        if (this.x == that.x) {
+            if (this.y == that.y){
+                return Double.NEGATIVE_INFINITY;
+            } else {
+                return Double.POSITIVE_INFINITY;
+            }
+        }
+        if (this.y == that.y) {
+            return 0.0d;
+        }
         return ((double) that.y - (double) this.y) / ((double) that.x - (double) this.x);
     }
 
     // compare two points by slopes they make with this point
     public Comparator<Point> slopeOrder() {
-        return (p1, p2) -> {
-            if (p1.slopeTo(p2) < p2.slopeTo(p1)) {
-                return 1;
-            } else if (p1.slopeTo(p2) > p2.slopeTo(p1)) {
-                return -1;
-            } else {
-                return 0;
-            }
-        };
+        return new SlopeOrder();
+    }
+
+
+    private class SlopeOrder implements Comparator<Point> {
+
+        @Override
+        public int compare(Point q1, Point q2) {
+           double slopeQ1 = slopeTo(q1);
+           double slopeQ2 = slopeTo(q2);
+
+           if (slopeQ1 > slopeQ2){
+               return 1;
+           } else if (slopeQ1 < slopeQ2){
+               return -1;
+           } else {
+               return 0;
+           }
+
+        }
     }
 
 }
