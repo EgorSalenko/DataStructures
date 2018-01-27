@@ -10,6 +10,17 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.StdOut;
 
+/*
+*
+* Given a point p, the following method determines whether p participates in a set of 4 or more collinear points.
+*
+* 1) Think of p as the origin.
+* 2) For each other point q, determine the slope it makes with p.
+* 3) Sort the points according to the slopes they makes with p.
+* 4 )Check if any 3 (or more) adjacent points in the sorted order have equal slopes with respect to p.
+* If so, these points, together with p, are collinear.
+*
+* */
 public class FastCollinearPoints {
 
     private List<LineSegment> segmentList;
@@ -20,25 +31,22 @@ public class FastCollinearPoints {
         if (points == null) throw new IllegalArgumentException();
         segmentList = new ArrayList<>();
 
-        // Think of p as the origin.
         for (int i = 0; i < points.length; i++) {
-            Point origin = points[i];
-            // For each other point q, determine the slope it makes with p.
+            Point p = points[i];
+            mergeSort(points, p.slopeOrder());
             List<Point> collinear = new ArrayList<>();
-            for (int j = 1; j < points.length; j++) {
-                // Sort the points according to the slopes they makes with p.
-                mergeSort(points, origin.slopeOrder());
-                // FIXME :: Add only one line segment
-                if (origin.slopeTo(points[j]) == origin.slopeTo(points[j - 1])) {
-                    collinear.add(origin);
-                    // Check if any 3 (or more) adjacent points in the sorted order have
-                    // equal slopes with respect to p. If so, these points, together with p,
-                    // are collinear.
-                    if (collinear.size() > 2) {
-                        segmentList.add(new LineSegment(Collections.min(collinear), Collections.max(collinear)));
-                        collinear.clear();
-                    }
+
+            for (int j = i + 1; j < points.length - 1; j++) {
+                Point q = points[j];
+                if (p.slopeTo(q) == p.slopeTo(points[j + 1])) {
+                    collinear.add(q);
+                } else {
+                    break;
                 }
+            }
+            if (!collinear.isEmpty()) {
+                segmentList.add(new LineSegment(Collections.min(collinear), Collections.max(collinear)));
+                collinear.clear();
             }
         }
     }
