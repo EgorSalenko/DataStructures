@@ -17,7 +17,7 @@ import edu.princeton.cs.algs4.StdOut;
 * 1) Think of p as the origin.
 * 2) For each other point q, determine the slope it makes with p.
 * 3) Sort the points according to the slopes they makes with p.
-* 4 )Check if any 3 (or more) adjacent points in the sorted order have equal slopes with respect to p.
+* 4) Check if any 3 (or more) adjacent points in the sorted order have equal slopes with respect to p.
 * If so, these points, together with p, are collinear.
 *
 * */
@@ -31,22 +31,26 @@ public class FastCollinearPoints {
         if (points == null) throw new IllegalArgumentException();
         segmentList = new ArrayList<>();
 
-        for (int i = 0; i < points.length; i++) {
+        int pivot = 0;
+        for (int i = pivot; i < points.length; i++) {
             Point p = points[i];
             mergeSort(points, p.slopeOrder());
+
             List<Point> collinear = new ArrayList<>();
 
-            for (int j = i + 1; j < points.length - 1; j++) {
+            for (int j = i + 1; j < points.length - 1; j++, i++) {
                 Point q = points[j];
-                if (p.slopeTo(q) == p.slopeTo(points[j + 1])) {
+                Point r = points[j + 1];
+                if (p.slopeTo(q) == q.slopeTo(r)) {
                     collinear.add(q);
                 } else {
+                    if (!collinear.isEmpty()) {
+                        LineSegment e = new LineSegment(Collections.min(collinear), Collections.max(collinear));
+                        segmentList.add(e);
+                        collinear.clear();
+                    }
                     break;
                 }
-            }
-            if (!collinear.isEmpty()) {
-                segmentList.add(new LineSegment(Collections.min(collinear), Collections.max(collinear)));
-                collinear.clear();
             }
         }
     }
@@ -59,22 +63,21 @@ public class FastCollinearPoints {
     private static void mergeSort(Point[] points, Comparator<Point> comparator) {
         int N = points.length;
         aux = new Point[N];
-        for (int n = 1; n < N; n = n+n) {
-            for (int i = 0; i < N-n; i += n+n) {
-                int lo = i;
-                int m  = i+n-1;
-                int hi = Math.min(i+n+n-1, N-1);
-                merge(points, lo, m, hi, comparator);
+        for (int n = 1; n < N; n = n + n) {
+            for (int i = 0; i < N - n; i += n + n) {
+                int m = i + n - 1;
+                int hi = Math.min(i + n + n - 1, N - 1);
+                merge(points, i, m, hi, comparator);
             }
         }
     }
 
     // the line segments
-    public LineSegment[] segments(){
+    public LineSegment[] segments() {
         return segmentList.toArray(new LineSegment[segmentList.size()]);
     }
 
-    private static void merge(Point[] array, int lo, int mid, int hi, Comparator<Point> comparator){
+    private static void merge(Point[] array, int lo, int mid, int hi, Comparator<Point> comparator) {
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
             aux[k] = array[k];
@@ -102,7 +105,7 @@ public class FastCollinearPoints {
 
         // read the n points from a file
         String path = "C:\\Users\\Richard\\Documents\\princeton algorithms course\\collinear\\";
-        String file = "input6.txt";
+        String file = "input10000.txt";
         In in = new In(path + file);
         int n = in.readInt();
         Point[] points = new Point[n];
