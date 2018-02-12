@@ -62,7 +62,7 @@ public class Point implements Comparable<Point> {
         if (this.y == that.y) {
             return 0.0d;
         }
-        return ((double) that.y - (double) this.y) / ((double) that.x - (double) this.x);
+        return (double) (that.y - this.y) / (double) (that.x - this.x);
     }
 
     // compare two points by slopes they make with this point
@@ -70,22 +70,21 @@ public class Point implements Comparable<Point> {
         return new SlopeOrder();
     }
 
-
     private class SlopeOrder implements Comparator<Point> {
 
         @Override
         public int compare(Point q1, Point q2) {
+
            double slopeQ1 = slopeTo(q1);
            double slopeQ2 = slopeTo(q2);
 
-           if (slopeQ1 > slopeQ2){
+           if (slopeQ1 < slopeQ2) {
                return 1;
-           } else if (slopeQ1 < slopeQ2){
+           } else if (slopeQ1 > slopeQ2) {
                return -1;
            } else {
                return 0;
            }
-
         }
     }
 
